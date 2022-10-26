@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "799100120755",
+    "firebase_url": "https://logindemo-26a4f.firebaseio.com",
+    "project_id": "logindemo-26a4f",
+    "storage_bucket": "logindemo-26a4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799100120755:android:a8aeb79c910a1e248f0ac6",
+        "android_client_info": {
+          "package_name": "com.example.bibletiles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799100120755-6oerp9vt3o9o0roamcbsarikq90gl3gd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaeb2YCLpjanv0Hv9LUmTVpMM6gtp7ebk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799100120755-6oerp9vt3o9o0roamcbsarikq90gl3gd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "799100120755-lfe6ou7p3qf5baurtg1nv83j7dr9pnco.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bibletiles"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
