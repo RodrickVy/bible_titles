@@ -1,4 +1,4 @@
-import 'package:bibletiles/domain/models/adaptive.dart';
+import 'package:bibletiles/domain/ui/adaptive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

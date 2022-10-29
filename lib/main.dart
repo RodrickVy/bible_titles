@@ -1,10 +1,12 @@
 import 'package:bibletiles/firebase_options.dart';
 import 'package:bibletiles/home/controller/home.controller.dart';
-import 'package:bibletiles/home/ui/home.view.dart';
+import 'package:bibletiles/home/ui/home.page.dart';
+import 'package:bibletiles/play/interface/play.view_model.dart';
+import 'package:bibletiles/play_setup/ui/play.page.dart';
 import 'package:bibletiles/play_setup/controller/play.setup.controller.dart';
-import 'package:bibletiles/play_setup/ui/play.setup.view.dart';
+import 'package:bibletiles/play_setup/ui/game.setup.page.dart';
 import 'package:bibletiles/tour/controller/tour.controller.dart';
-import 'package:bibletiles/tour/ui/tour.view.dart';
+import 'package:bibletiles/tour/ui/tour.page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,7 @@ class BindBibleTiles extends Bindings {
     Get.put(HomeController());
     Get.put(TourController());
     Get.put(PlaySetupController());
+
   }
 
 }
@@ -49,10 +52,11 @@ class BibleTilesApp extends StatelessWidget {
       ) ),
 
       getPages: [
-        GetPage(name: '/', page: () => const HomeView<HomeController>()),
+        GetPage(name: '/', page: () => const HomePage<HomeController>()),
         GetPage(name: '/tour', page: () => const TourPage<TourController>()),
-        GetPage(name: '/setup', page: () => const PlaySetupPage<PlaySetupController>()),
-        GetPage(name: '/setup/:stage', page: () => const PlaySetupPage<PlaySetupController>())
+        GetPage(name: '/setup', page: () => const GameSetupPage<PlaySetupController>()),
+        GetPage(name: '/setup/:stage', page: () => const GameSetupPage<PlaySetupController>()),
+        GetPage(name: '/play', page: () => const PlayGamePage<PlayViewModel>())
       ],
     );
   }

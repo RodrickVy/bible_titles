@@ -1,13 +1,13 @@
 import 'package:bibletiles/domain/ui/a.view.dart';
 import 'package:bibletiles/domain/ui/heading.dart';
+import 'package:bibletiles/home/interface/home.view_model.dart';
 import 'package:bibletiles/home/ui/appbar.view.dart';
-import 'package:bibletiles/home/ui/home.view.model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class HomeView<T extends HomeViewModel> extends AView<T> {
-  const HomeView({super.key});
+class HomePage<T extends HomeViewModel> extends AView<T> {
+  const HomePage({super.key});
 
 
   static const double buttonSpacing = 20;

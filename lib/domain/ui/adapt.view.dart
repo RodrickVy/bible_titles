@@ -1,7 +1,7 @@
 
-import 'package:bibletiles/domain/models/adaptive.dart';
+import 'package:bibletiles/domain/ui/adaptive.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 /// Makes you widget adaptive  by mixing in [Adaptive]
 abstract class AdaptView extends StatelessWidget with Adaptive {

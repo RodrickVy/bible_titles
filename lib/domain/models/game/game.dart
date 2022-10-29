@@ -1,11 +1,11 @@
-import 'package:bibletiles/domain/models/bible.tile.category.dart';
-import 'package:bibletiles/domain/models/bible.tiles.player.dart';
+import 'package:bibletiles/domain/models/game/player.dart';
+import 'package:bibletiles/domain/models/game/tiles.category.dart';
 
 class BibleTilesGame {
   final DateTime began;
   final DateTime ended;
-  final List<BibleTilePlayer> players;
-  final List<BibleTileCategory> categories;
+  final List<Player> players;
+  final List<TilesCategory> categories;
   final int currentPlayer;
 
   const BibleTilesGame(

@@ -1,99 +1,80 @@
-import 'package:bibletiles/domain/models/bible.tile.category.dart';
-import 'package:bibletiles/domain/models/bible.tiles.player.dart';
+import 'dart:math';
+
+import 'package:bibletiles/domain/models/game/a.play.dart';
+import 'package:bibletiles/domain/models/game/level.dart';
+import 'package:bibletiles/domain/models/game/mode.dart';
+import 'package:bibletiles/domain/models/game/player.dart';
+import 'package:bibletiles/domain/models/game/setup.stage.dart';
+import 'package:bibletiles/domain/models/game/tile.dart';
+import 'package:bibletiles/domain/models/game/tiles.category.dart';
 import 'package:bibletiles/play_setup/controller/repo.dart';
-import 'package:bibletiles/play_setup/ui/play.setup.view_model.dart';
+
+import 'package:bibletiles/play_setup/interface/play.game.view_model.dart';
 import 'package:get/get.dart';
 
-class PlaySetupController extends GetxController implements PlaySetupViewModel {
+class PlaySetupController extends GetxController with GameMetaData {
+  static List<TilesCategory> get allCategories => GameMetaData.categories;
 
-  @override
-  List<String> get namesSuggestions => suggestedProfiles.map((e) => e.name).toList();
-
-  @override
-  List<String> get playerAvatars =>  suggestedProfiles.map((e) => e.avatar).toList();
+  final RxMap<int,Player> _players = <int,Player>{}.obs;
 
 
-  final Rx<GameType> _gameType = GameType.teams.obs;
-
-  @override
-  GameType get gameType =>_gameType.value;
+  final Rx<APlay?> _currentPlay = Rx<APlay?>(null);
 
 
-  @override
-  int get categoryLimit => 5;
 
-  static List<BibleTileCategory> get allCategories {
-    return [
-      const BibleTileCategory(
-          name: "Isreal's Kings",
-          themes: ['kings', "obedience", 'government', 'wars', 'Israel', 'history'],
-          image: 'assets/logos/icon.png',
-          description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-          tiles: []),
-      const BibleTileCategory(
-          name: "Joseph",
-          themes: ['history'],
-          image: 'assets/logos/icon.png',
-          description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-          tiles: []),
-      const BibleTileCategory(
-          name: "Women In Scripture",
-          themes: ['history'],
-          image: 'assets/logos/icon.png',
-          description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-          tiles: []),
-      const BibleTileCategory(
-          name: "Jesus",
-          themes: [],
-          image: 'assets/logos/icon.png',
-          description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-          tiles: []),
-      const BibleTileCategory(
-          name: "Angels",
-          themes: [],
-          image: 'assets/logos/icon.png',
-          description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-          tiles: [])
-    ];
+  final RxList<int> _tilesOpened = RxList();
+  
+  
+  
+  
+  /// RXs
+  void openTile(Player player,Tile tile){
+    _currentPlay(APlay(level: level, player: player, tile: tile, onPlayerUpdate:(player){
+      _players[player.id] = player;
+    }));
   }
 
-  final RxInt _level = 0.obs;
-  final RxList<BibleTilePlayer> _players = <BibleTilePlayer>[].obs;
-  final RxList<BibleTileCategory> _selectedCategories = <BibleTileCategory>[].obs;
-  final RxList<BibleTileCategory> _availableCategories = allCategories.obs;
+  void answerATile(String answer){
+    _currentPlay(_currentPlay.value?.answerQuestion(answer));
+  }
+  
+  
+  final Rx<GameMode> _gameType = GameMode.teams.obs;
+  final Rx<GameLevel> _level = GameLevel.easy.obs;
 
-
-  @override
-  int get levelIndex => _level.value;
-
-  @override
-  GameLevel get level => GameLevel.values[_level.value];
-
-  @override
-  List<BibleTilePlayer> get players => _players;
+  final RxList<TilesCategory> _selectedCategories = <TilesCategory>[].obs;
+  final RxList<TilesCategory> _availableCategories = allCategories.obs;
 
   @override
-  List<BibleTileCategory> get availableCategories => _availableCategories;
+  GameMode get gameType => _gameType.value;
 
   @override
-  List<BibleTileCategory> get selectedCategories => _selectedCategories;
+  GameLevel get level => _level.value;
+
+  @override
+  List<Player> get players => _players.values.toList();
+
+  @override
+  List<TilesCategory> get availableCategories => _availableCategories;
+
+  @override
+  List<TilesCategory> get selectedCategories => _selectedCategories;
 
   @override
   SetUpStage get setupStage {
-   return SetUpStage.values.byName(Get.parameters['stage']??SetUpStage.values.first.name);
+    return SetUpStage.values.byName(Get.parameters['stage'] ?? SetUpStage.values.first.name);
   }
+
   @override
-  String suggestName(){
+  String suggestName() {
     final List<String> suggestions = namesSuggestions;
     suggestions.shuffle();
     return suggestions.first;
   }
+
   @override
-  void setLevel(double level) {
-    if (level > 3) {
-      _level(3);
-    }
-    _level(level.toInt());
+  void setLevel(GameLevel level) {
+    _level(level);
   }
 
   @override
@@ -104,7 +85,6 @@ class PlaySetupController extends GetxController implements PlaySetupViewModel {
   @override
   void nextStage() {
     switch (setupStage) {
-
       case SetUpStage.typeSetup:
         Get.toNamed('/setup/${SetUpStage.levelSetup.name}');
         break;
@@ -145,7 +125,7 @@ class PlaySetupController extends GetxController implements PlaySetupViewModel {
     if (sanitizedQuery.isEmpty) {
       _availableCategories(allCategories);
     } else {
-      List<BibleTileCategory> searchResults = allCategories.where((element) {
+      List<TilesCategory> searchResults = allCategories.where((element) {
         return _sanitizeForSearch(element.name).contains(sanitizedQuery) ||
             _sanitizeForSearch(element.description).contains(sanitizedQuery) ||
             element.themes.map((e) => _sanitizeForSearch(e)).contains(sanitizedQuery) ||
@@ -156,7 +136,6 @@ class PlaySetupController extends GetxController implements PlaySetupViewModel {
       }).toList();
       _availableCategories(searchResults);
     }
-
   }
 
   String _sanitizeForSearch(String word) {
@@ -164,29 +143,32 @@ class PlaySetupController extends GetxController implements PlaySetupViewModel {
   }
 
   @override
-  void selectCategory(BibleTileCategory category) {
-    if (!_selectedCategories.contains(category)) {
-      _selectedCategories.add(category);
-    } else {
-      _selectedCategories.remove(category);
-    }
+  void selectCategory(TilesCategory category) {
+
+      if (!_selectedCategories.contains(category) && _selectedCategories.length < categoryLimit) {
+        _selectedCategories.add(category);
+      } else {
+        _selectedCategories.remove(category);
+      }
+
+
   }
 
-
   @override
-  void autoSelectCategories(){
-    final List<BibleTileCategory> categories = allCategories;
+  void autoSelectCategories() {
+    List<TilesCategory> categories = [...allCategories];
+
     categories.shuffle();
-    if(categories.length > categoryLimit){
-      _selectedCategories.addAll(categories.sublist(0,categoryLimit - _selectedCategories.length));
-    }else{
+
+    if (categories.length > categoryLimit) {
+      _selectedCategories.addAll(categories.sublist(0, categoryLimit - _selectedCategories.length));
+    } else {
       _selectedCategories(categories);
     }
-
   }
 
   @override
-  void unselectCategory(BibleTileCategory category) {
+  void unselectCategory(TilesCategory category) {
     final categories = _selectedCategories;
     categories.remove(category);
 
@@ -194,17 +176,17 @@ class PlaySetupController extends GetxController implements PlaySetupViewModel {
   }
 
   @override
-  void addPlayer(BibleTilePlayer player) {
-    _players.add(player);
+  void addPlayer(Player player) {
+    _players[player.id] = player;
   }
 
   @override
-  void removePlayer(BibleTilePlayer player) {
+  void removePlayer(Player player) {
     _players.remove(player);
   }
 
   @override
-  void selectGameType(GameType type){
+  void selectGameType(GameMode type) {
     _gameType(type);
   }
 }

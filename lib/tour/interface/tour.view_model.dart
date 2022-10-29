@@ -1,4 +1,4 @@
-import 'package:bibletiles/tour/model/tour.segment.dart';
+import 'package:bibletiles/domain/models/tour/tour.segment.dart';
 
 abstract class TourViewModel{
 

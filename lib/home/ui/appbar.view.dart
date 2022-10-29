@@ -1,8 +1,6 @@
 
 
-
-
-import 'package:bibletiles/home/ui/home.view.model.dart';
+import 'package:bibletiles/home/interface/home.view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

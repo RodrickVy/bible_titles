@@ -1,4 +1,4 @@
-enum BibleTilesLevel{
+enum GameLevel{
   easy,
   medium,
   hard

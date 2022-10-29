@@ -1,7 +1,7 @@
 
 
-import 'package:bibletiles/tour/model/tour.segment.dart';
-import 'package:bibletiles/tour/ui/view.model.dart';
+import 'package:bibletiles/domain/models/tour/tour.segment.dart';
+import 'package:bibletiles/tour/interface/tour.view_model.dart';
 import 'package:get/get.dart';
 
 class TourController extends GetxController implements TourViewModel {
