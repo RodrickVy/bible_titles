@@ -1,10 +1,10 @@
+import 'dart:collection';
+
 import 'package:bibletiles/domain/models/game/level.dart';
-import 'package:bibletiles/domain/models/game/mode.dart';
 import 'package:bibletiles/domain/models/game/tile.dart';
 import 'package:bibletiles/domain/models/game/tile.question.dart';
 
 class TilesCategory {
-
   final String name;
 
   // the themes this category encompasses mostly used as keywords for filtering
@@ -14,41 +14,51 @@ class TilesCategory {
   final String image;
   final String description;
 
-  // the tiles
-  final List<Tile> tiles;
+  // the tiles points,tile
+  late SplayTreeMap<int, List<Tile>> tiles;
 
-  const TilesCategory(
-      {required this.name, required this.themes, required this.image, required this.description, required this.tiles});
+  TilesCategory(
+      {required this.name,
+      required this.themes,
+      required this.image,
+      required this.description,
+      required final Map<int, List<Tile>> categoryTiles
+      // setting all the points based on keys
+      })
+      : tiles = SplayTreeMap<int, List<Tile>>.from(setTilePoints(categoryTiles));
+
+  static SplayTreeMap<int, List<Tile>> setTilePoints(Map<int, List<Tile>> categoryTiles) {
+    Iterable<MapEntry<int, List<Tile>>> updatedEntries = categoryTiles.entries.map((MapEntry<int, List<Tile>> entry) {
+      return MapEntry(entry.key, entry.value.map((e) => e.copyWith(points: entry.key)).toList());
+    });
+
+    return  SplayTreeMap<int, List<Tile>>.from({ for (var e in updatedEntries) e.key : e.value });
+
+  }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is TilesCategory &&
-              runtimeType == other.runtimeType &&
-              name == other.name &&
-              themes == other.themes &&
-              image == other.image &&
-              description == other.description &&
-              tiles == other.tiles;
+      other is TilesCategory &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          themes == other.themes &&
+          image == other.image &&
+          description == other.description &&
+          tiles == other.tiles;
 
   @override
   int get hashCode => name.hashCode ^ themes.hashCode ^ image.hashCode ^ description.hashCode ^ tiles.hashCode;
 
+  List<Tile> get generateTiles {
+    return tiles.values.map((value) {
+      final List<Tile> tiles = value;
+      tiles.shuffle();
+      return tiles.first;
+    }).toList();
+  }
 
-  List<TileQuestion> get easyQuestions => tiles.map((e) => e.easy).toList();
-
-  List<TileQuestion> get mediumQuestions => tiles.map((e) => e.medium).toList();
-
-  List<TileQuestion> get hardQuestions => tiles.map((e) => e.hard).toList();
-
-  List<TileQuestion>  questionsByLevel(GameLevel level) {
-    switch (level) {
-      case GameLevel.easy:
-        return easyQuestions;
-      case GameLevel.medium:
-        return mediumQuestions;
-      case GameLevel.hard:
-        return hardQuestions;
-    }
+  List<Tile> get allTiles{
+    return tiles.values.fold([], (previousValue, element) => [...previousValue,...element]);
   }
 }

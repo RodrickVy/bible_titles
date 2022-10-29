@@ -1,6 +1,9 @@
-import 'package:bibletiles/domain/models/game/team.profile.dart';
-import 'package:bibletiles/domain/models/game/tiles.category.dart';
+import 'dart:collection';
 
+import 'package:bibletiles/domain/models/game/team.profile.dart';
+import 'package:bibletiles/domain/models/game/tile.dart';
+import 'package:bibletiles/domain/models/game/tile.question.dart';
+import 'package:bibletiles/domain/models/game/tiles.category.dart';
 
 mixin GameMetaData {
   static const List<TeamProfile> suggestedProfiles = [
@@ -282,65 +285,504 @@ mixin GameMetaData {
     TeamProfile(name: "Parable of the Beatdown", avatar: "assets/images/default_avatar.png"),
     TeamProfile(name: "Refuge", avatar: "assets/images/default_avatar.png"),
     TeamProfile(name: "Agape", avatar: "assets/images/default_avatar.png"),
-    TeamProfile(name:"Plugged In", avatar: "assets/images/default_avatar.png"),
+    TeamProfile(name: "Plugged In", avatar: "assets/images/default_avatar.png"),
   ];
 
+  static List<TilesCategory> categories = [
+    TilesCategory(
+      name: "David",
+      themes: ['kings', "obedience", 'government', 'wars', 'Israel', 'history'],
+      image: 'assets/logos/icon.png',
+      description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
+      categoryTiles: <int, List<Tile>>{
+        100: [
+          const Tile(
+            question: "What was David's job as a young boy?",
+            answer: ' Shepherd',
+            explanation:
+                "David was not just an ordinary boy, but one who trusted in God to help him slay the lions and bears who came to attack the sheep. 1 Sam 17:34 ",
+            image: '',
+          ),
+          const Tile(
+            question: "Who was the king of Israel before David?",
+            answer: 'Soul',
+            explanation:
+                "I Samuel 9 and 10 tell us that Saul was the first king, and David came after him. Solomon, Josiah, and Hezekiah were kings after David.",
+            image: '',
+          )
+        ],
+        200: [
+          const Tile(
+              image: '',
+              question:
+                  "Before David married King Saul's daughter, Michal, Saul had offered David another of his daughters in marriage. What was her name?",
+              answer: 'Merab',
+              explanation:
+                  "Following David's slaying of the Philistine giant, Goliath, David was compelled by King Saul to stay at the palace."
+                  " David was successful in all he did, so Saul promoted him to a high rank in the army. "
+                  "All the people loved David so much that Saul became quite jealous and wanted David dead. "
+                  "As part of his strategy he decided to offer his older daughter Merab to David in marriage. "
+                  "His only request was that David would continue to serve him in the army."
+                  " He thought that by doing this it would be inevitable that David would be killed at some point.  (See 1 Samuel 18)."),
+          const Tile(
+            question: "What was the bride price that King Saul requested from David for his daughter Michal?",
+            answer: '100 Philistine foreskins',
+            explanation:
+                "After David's refusal to marry Saul's older daughter, King Saul discovered that his daughter Michal was actually in love with David. He saw another opportunity to try to get David to become his son-in-law and thought that Michal could be used as a snare to trap David. David however refused the offer again on the grounds of being a poor man, presumably implying that he wouldn't be able to afford the bride price required by a king. Saul saw this as an opportunity to get David killed so didn't ask for money or anything of monetary value: he simply asked David to go and kill 100 Philistines and bring back their foreskins! (This sounds somewhat gruesome to modern ears!) David agreed to the challenge and went to it with a vengeance. He and his men went out and killed not 100 but 200 Philistines and brought their foreskins to the king. And so David and Michal were married. (See 1 Samuel 18:20-27).",
+            image: '',
+          ),
+        ],
+        300: [
+          const Tile(
+              image: '',
+              question:
+              "Where was David's third anointing?",
+              answer: 'Hebron',
+              explanation:
+              "David was anointed the first time in Bethleham by Samuel before Saul knew about David. The second and third anointings were in Hebron. The second was for part of Israel and the third was for all of Israel."),
+          const Tile(
+            question: " How many sons did Jesse have, and what was David's placing among them, according to 1 Samuel?",
+            answer: '8 sons, youngest',
+            explanation:
+            "1 Samuel 17:12b Jesse had eight sons, and in Saul's time he was old and well advanced in years. Samuel originally thought that the oldest son, Eliab, would be the one who was to be king, but God replied in 1 Samuel 16:7 The Lord does not look at the things man looks at. Man looks at the outward appearance, but the Lord looks at the heart. Meaning to say God did not choose the oldest, but the most faithful.",
+            image: '',
+          ),
+        ],
+        400: [
+          const Tile(
+              image: '',
+              question:
+              " How many years did David reign as king?",
+              answer: '40',
+              explanation:
+              "I Kings 2:11 - David reigned for seven years in Hebron, and then thirty-three years in Jerusalem."),
+          const Tile(
+            question: "While still a young man, David was called into the service of Saul. He became an armor-bearer and did what other task for the king?",
+            answer: 'Played the harp',
+            explanation:
+            "Whenever the spirit from God came upon Saul, David would take his harp and play. Then relief would come to Saul; he would feel better, and the evil spirit would leave him. (1 Samuel 16:23)",
+            image: '',
+          ),
+        ],
+        500: [
+          const Tile(
+              image: '',
+              question:
+              "How did Michal help David to escape from her father when he was trying to kill David?",
+              answer: 'Let him down through the window',
+              explanation:'''
+              Saul's jealousy and hatred of David continued and Saul was constantly on the lookout for an opportunity to kill his son-in-law. One night Saul sent men to watch David's house with the plan to kill him the next morning. Michal must have heard of this, though, and persuaded her husband that he had to flee for his life. She let him down out of a window and he was able to escape.
 
-  static const  List<TilesCategory> categories =   [
+Michal then dressed an idol and put it in David's place in the bed. When Saul's men came the next day she pretended that David was ill so they couldn't see him. On hearing this her father himself then came to the house and was angry with her deception. (See 1 Samuel 19:11-17).
+              '''),
+        ]
+      },
+    ),
     TilesCategory(
-        name: "Isreal's Kings",
-        themes: ['kings', "obedience", 'government', 'wars', 'Israel', 'history'],
-        image: 'assets/logos/icon.png',
-        description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-        tiles: []),
+      name: "Kings Of Isreal",
+      themes: ['kings', "obedience", 'government', 'wars', 'Israel', 'history'],
+      image: 'assets/logos/icon.png',
+      description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
+      categoryTiles: <int, List<Tile>>{
+        100: [
+          const Tile(
+            question: "What was David's job as a young boy?",
+            answer: ' Shepherd',
+            explanation:
+            "David was not just an ordinary boy, but one who trusted in God to help him slay the lions and bears who came to attack the sheep. 1 Sam 17:34 ",
+            image: '',
+          ),
+          const Tile(
+            question: "Who was the king of Israel before David?",
+            answer: 'Soul',
+            explanation:
+            "I Samuel 9 and 10 tell us that Saul was the first king, and David came after him. Solomon, Josiah, and Hezekiah were kings after David.",
+            image: '',
+          )
+        ],
+        200: [
+          const Tile(
+              image: '',
+              question:
+              "Before David married King Saul's daughter, Michal, Saul had offered David another of his daughters in marriage. What was her name?",
+              answer: 'Merab',
+              explanation:
+              "Following David's slaying of the Philistine giant, Goliath, David was compelled by King Saul to stay at the palace."
+                  " David was successful in all he did, so Saul promoted him to a high rank in the army. "
+                  "All the people loved David so much that Saul became quite jealous and wanted David dead. "
+                  "As part of his strategy he decided to offer his older daughter Merab to David in marriage. "
+                  "His only request was that David would continue to serve him in the army."
+                  " He thought that by doing this it would be inevitable that David would be killed at some point.  (See 1 Samuel 18)."),
+          const Tile(
+            question: "What was the bride price that King Saul requested from David for his daughter Michal?",
+            answer: '100 Philistine foreskins',
+            explanation:
+            "After David's refusal to marry Saul's older daughter, King Saul discovered that his daughter Michal was actually in love with David. He saw another opportunity to try to get David to become his son-in-law and thought that Michal could be used as a snare to trap David. David however refused the offer again on the grounds of being a poor man, presumably implying that he wouldn't be able to afford the bride price required by a king. Saul saw this as an opportunity to get David killed so didn't ask for money or anything of monetary value: he simply asked David to go and kill 100 Philistines and bring back their foreskins! (This sounds somewhat gruesome to modern ears!) David agreed to the challenge and went to it with a vengeance. He and his men went out and killed not 100 but 200 Philistines and brought their foreskins to the king. And so David and Michal were married. (See 1 Samuel 18:20-27).",
+            image: '',
+          ),
+        ],
+        300: [
+          const Tile(
+              image: '',
+              question:
+              "Where was David's third anointing?",
+              answer: 'Hebron',
+              explanation:
+              "David was anointed the first time in Bethleham by Samuel before Saul knew about David. The second and third anointings were in Hebron. The second was for part of Israel and the third was for all of Israel."),
+          const Tile(
+            question: " How many sons did Jesse have, and what was David's placing among them, according to 1 Samuel?",
+            answer: '8 sons, youngest',
+            explanation:
+            "1 Samuel 17:12b Jesse had eight sons, and in Saul's time he was old and well advanced in years. Samuel originally thought that the oldest son, Eliab, would be the one who was to be king, but God replied in 1 Samuel 16:7 The Lord does not look at the things man looks at. Man looks at the outward appearance, but the Lord looks at the heart. Meaning to say God did not choose the oldest, but the most faithful.",
+            image: '',
+          ),
+        ],
+        400: [
+          const Tile(
+              image: '',
+              question:
+              " How many years did David reign as king?",
+              answer: '40',
+              explanation:
+              "I Kings 2:11 - David reigned for seven years in Hebron, and then thirty-three years in Jerusalem."),
+          const Tile(
+            question: "While still a young man, David was called into the service of Saul. He became an armor-bearer and did what other task for the king?",
+            answer: 'Played the harp',
+            explanation:
+            "Whenever the spirit from God came upon Saul, David would take his harp and play. Then relief would come to Saul; he would feel better, and the evil spirit would leave him. (1 Samuel 16:23)",
+            image: '',
+          ),
+        ],
+        500: [
+          const Tile(
+              image: '',
+              question:
+              "How did Michal help David to escape from her father when he was trying to kill David?",
+              answer: 'Let him down through the window',
+              explanation:'''
+              Saul's jealousy and hatred of David continued and Saul was constantly on the lookout for an opportunity to kill his son-in-law. One night Saul sent men to watch David's house with the plan to kill him the next morning. Michal must have heard of this, though, and persuaded her husband that he had to flee for his life. She let him down out of a window and he was able to escape.
+
+Michal then dressed an idol and put it in David's place in the bed. When Saul's men came the next day she pretended that David was ill so they couldn't see him. On hearing this her father himself then came to the house and was angry with her deception. (See 1 Samuel 19:11-17).
+              '''),
+        ]
+      },
+    ),
     TilesCategory(
-        name: "Journey",
-        themes: ['kings', "obedience", 'government', 'wars', 'Israel', 'history'],
-        image: 'assets/logos/icon.png',
-        description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-        tiles: []),
+      name: "Kings Of Isreal",
+      themes: ['kings', "obedience", 'government', 'wars', 'Israel', 'history'],
+      image: 'assets/logos/icon.png',
+      description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
+      categoryTiles: <int, List<Tile>>{
+        100: [
+          const Tile(
+            question: "What was David's job as a young boy?",
+            answer: ' Shepherd',
+            explanation:
+            "David was not just an ordinary boy, but one who trusted in God to help him slay the lions and bears who came to attack the sheep. 1 Sam 17:34 ",
+            image: '',
+          ),
+          const Tile(
+            question: "Who was the king of Israel before David?",
+            answer: 'Soul',
+            explanation:
+            "I Samuel 9 and 10 tell us that Saul was the first king, and David came after him. Solomon, Josiah, and Hezekiah were kings after David.",
+            image: '',
+          )
+        ],
+        200: [
+          const Tile(
+              image: '',
+              question:
+              "Before David married King Saul's daughter, Michal, Saul had offered David another of his daughters in marriage. What was her name?",
+              answer: 'Merab',
+              explanation:
+              "Following David's slaying of the Philistine giant, Goliath, David was compelled by King Saul to stay at the palace."
+                  " David was successful in all he did, so Saul promoted him to a high rank in the army. "
+                  "All the people loved David so much that Saul became quite jealous and wanted David dead. "
+                  "As part of his strategy he decided to offer his older daughter Merab to David in marriage. "
+                  "His only request was that David would continue to serve him in the army."
+                  " He thought that by doing this it would be inevitable that David would be killed at some point.  (See 1 Samuel 18)."),
+          const Tile(
+            question: "What was the bride price that King Saul requested from David for his daughter Michal?",
+            answer: '100 Philistine foreskins',
+            explanation:
+            "After David's refusal to marry Saul's older daughter, King Saul discovered that his daughter Michal was actually in love with David. He saw another opportunity to try to get David to become his son-in-law and thought that Michal could be used as a snare to trap David. David however refused the offer again on the grounds of being a poor man, presumably implying that he wouldn't be able to afford the bride price required by a king. Saul saw this as an opportunity to get David killed so didn't ask for money or anything of monetary value: he simply asked David to go and kill 100 Philistines and bring back their foreskins! (This sounds somewhat gruesome to modern ears!) David agreed to the challenge and went to it with a vengeance. He and his men went out and killed not 100 but 200 Philistines and brought their foreskins to the king. And so David and Michal were married. (See 1 Samuel 18:20-27).",
+            image: '',
+          ),
+        ],
+        300: [
+          const Tile(
+              image: '',
+              question:
+              "Where was David's third anointing?",
+              answer: 'Hebron',
+              explanation:
+              "David was anointed the first time in Bethleham by Samuel before Saul knew about David. The second and third anointings were in Hebron. The second was for part of Israel and the third was for all of Israel."),
+          const Tile(
+            question: " How many sons did Jesse have, and what was David's placing among them, according to 1 Samuel?",
+            answer: '8 sons, youngest',
+            explanation:
+            "1 Samuel 17:12b Jesse had eight sons, and in Saul's time he was old and well advanced in years. Samuel originally thought that the oldest son, Eliab, would be the one who was to be king, but God replied in 1 Samuel 16:7 The Lord does not look at the things man looks at. Man looks at the outward appearance, but the Lord looks at the heart. Meaning to say God did not choose the oldest, but the most faithful.",
+            image: '',
+          ),
+        ],
+        400: [
+          const Tile(
+              image: '',
+              question:
+              " How many years did David reign as king?",
+              answer: '40',
+              explanation:
+              "I Kings 2:11 - David reigned for seven years in Hebron, and then thirty-three years in Jerusalem."),
+          const Tile(
+            question: "While still a young man, David was called into the service of Saul. He became an armor-bearer and did what other task for the king?",
+            answer: 'Played the harp',
+            explanation:
+            "Whenever the spirit from God came upon Saul, David would take his harp and play. Then relief would come to Saul; he would feel better, and the evil spirit would leave him. (1 Samuel 16:23)",
+            image: '',
+          ),
+        ],
+        500: [
+          const Tile(
+              image: '',
+              question:
+              "How did Michal help David to escape from her father when he was trying to kill David?",
+              answer: 'Let him down through the window',
+              explanation:'''
+              Saul's jealousy and hatred of David continued and Saul was constantly on the lookout for an opportunity to kill his son-in-law. One night Saul sent men to watch David's house with the plan to kill him the next morning. Michal must have heard of this, though, and persuaded her husband that he had to flee for his life. She let him down out of a window and he was able to escape.
+
+Michal then dressed an idol and put it in David's place in the bed. When Saul's men came the next day she pretended that David was ill so they couldn't see him. On hearing this her father himself then came to the house and was angry with her deception. (See 1 Samuel 19:11-17).
+              '''),
+        ]
+      },
+    ),
     TilesCategory(
-        name: "Joseph",
-        themes: ['history'],
-        image: 'assets/logos/icon.png',
-        description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-        tiles: []),
+      name: "Chain Of Prophecy",
+      themes: ['kings', "obedience", 'government', 'wars', 'Israel', 'history'],
+      image: 'assets/logos/icon.png',
+      description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
+      categoryTiles: <int, List<Tile>>{
+        100: [
+          const Tile(
+            question: "What was David's job as a young boy?",
+            answer: ' Shepherd',
+            explanation:
+            "David was not just an ordinary boy, but one who trusted in God to help him slay the lions and bears who came to attack the sheep. 1 Sam 17:34 ",
+            image: '',
+          ),
+          const Tile(
+            question: "Who was the king of Israel before David?",
+            answer: 'Soul',
+            explanation:
+            "I Samuel 9 and 10 tell us that Saul was the first king, and David came after him. Solomon, Josiah, and Hezekiah were kings after David.",
+            image: '',
+          )
+        ],
+        200: [
+          const Tile(
+              image: '',
+              question:
+              "Before David married King Saul's daughter, Michal, Saul had offered David another of his daughters in marriage. What was her name?",
+              answer: 'Merab',
+              explanation:
+              "Following David's slaying of the Philistine giant, Goliath, David was compelled by King Saul to stay at the palace."
+                  " David was successful in all he did, so Saul promoted him to a high rank in the army. "
+                  "All the people loved David so much that Saul became quite jealous and wanted David dead. "
+                  "As part of his strategy he decided to offer his older daughter Merab to David in marriage. "
+                  "His only request was that David would continue to serve him in the army."
+                  " He thought that by doing this it would be inevitable that David would be killed at some point.  (See 1 Samuel 18)."),
+          const Tile(
+            question: "What was the bride price that King Saul requested from David for his daughter Michal?",
+            answer: '100 Philistine foreskins',
+            explanation:
+            "After David's refusal to marry Saul's older daughter, King Saul discovered that his daughter Michal was actually in love with David. He saw another opportunity to try to get David to become his son-in-law and thought that Michal could be used as a snare to trap David. David however refused the offer again on the grounds of being a poor man, presumably implying that he wouldn't be able to afford the bride price required by a king. Saul saw this as an opportunity to get David killed so didn't ask for money or anything of monetary value: he simply asked David to go and kill 100 Philistines and bring back their foreskins! (This sounds somewhat gruesome to modern ears!) David agreed to the challenge and went to it with a vengeance. He and his men went out and killed not 100 but 200 Philistines and brought their foreskins to the king. And so David and Michal were married. (See 1 Samuel 18:20-27).",
+            image: '',
+          ),
+        ],
+        300: [
+          const Tile(
+              image: '',
+              question:
+              "Where was David's third anointing?",
+              answer: 'Hebron',
+              explanation:
+              "David was anointed the first time in Bethleham by Samuel before Saul knew about David. The second and third anointings were in Hebron. The second was for part of Israel and the third was for all of Israel."),
+          const Tile(
+            question: " How many sons did Jesse have, and what was David's placing among them, according to 1 Samuel?",
+            answer: '8 sons, youngest',
+            explanation:
+            "1 Samuel 17:12b Jesse had eight sons, and in Saul's time he was old and well advanced in years. Samuel originally thought that the oldest son, Eliab, would be the one who was to be king, but God replied in 1 Samuel 16:7 The Lord does not look at the things man looks at. Man looks at the outward appearance, but the Lord looks at the heart. Meaning to say God did not choose the oldest, but the most faithful.",
+            image: '',
+          ),
+        ],
+        400: [
+          const Tile(
+              image: '',
+              question:
+              " How many years did David reign as king?",
+              answer: '40',
+              explanation:
+              "I Kings 2:11 - David reigned for seven years in Hebron, and then thirty-three years in Jerusalem."),
+          const Tile(
+            question: "While still a young man, David was called into the service of Saul. He became an armor-bearer and did what other task for the king?",
+            answer: 'Played the harp',
+            explanation:
+            "Whenever the spirit from God came upon Saul, David would take his harp and play. Then relief would come to Saul; he would feel better, and the evil spirit would leave him. (1 Samuel 16:23)",
+            image: '',
+          ),
+        ],
+        500: [
+          const Tile(
+              image: '',
+              question:
+              "How did Michal help David to escape from her father when he was trying to kill David?",
+              answer: 'Let him down through the window',
+              explanation:'''
+              Saul's jealousy and hatred of David continued and Saul was constantly on the lookout for an opportunity to kill his son-in-law. One night Saul sent men to watch David's house with the plan to kill him the next morning. Michal must have heard of this, though, and persuaded her husband that he had to flee for his life. She let him down out of a window and he was able to escape.
+
+Michal then dressed an idol and put it in David's place in the bed. When Saul's men came the next day she pretended that David was ill so they couldn't see him. On hearing this her father himself then came to the house and was angry with her deception. (See 1 Samuel 19:11-17).
+              '''),
+        ]
+      },
+    ),
     TilesCategory(
-        name: "Women In Scripture",
-        themes: ['history'],
-        image: 'assets/logos/icon.png',
-        description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-        tiles: []),
-    TilesCategory(
-        name: "Jesus",
-        themes: [],
-        image: 'assets/logos/icon.png',
-        description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-        tiles: []),
-    TilesCategory(
-        name: "Angels",
-        themes: [],
-        image: 'assets/logos/icon.png',
-        description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
-        tiles: [])
+      name: "The Early Church",
+      themes: ['kings', "obedience", 'government', 'wars', 'Israel', 'history'],
+      image: 'assets/logos/icon.png',
+      description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
+      categoryTiles: <int, List<Tile>>{
+        100: [
+          const Tile(
+            question: "What was David's job as a young boy?",
+            answer: ' Shepherd',
+            explanation:
+            "David was not just an ordinary boy, but one who trusted in God to help him slay the lions and bears who came to attack the sheep. 1 Sam 17:34 ",
+            image: '',
+          ),
+          const Tile(
+            question: "Who was the king of Israel before David?",
+            answer: 'Soul',
+            explanation:
+            "I Samuel 9 and 10 tell us that Saul was the first king, and David came after him. Solomon, Josiah, and Hezekiah were kings after David.",
+            image: '',
+          )
+        ],
+        200: [
+          const Tile(
+              image: '',
+              question:
+              "Before David married King Saul's daughter, Michal, Saul had offered David another of his daughters in marriage. What was her name?",
+              answer: 'Merab',
+              explanation:
+              "Following David's slaying of the Philistine giant, Goliath, David was compelled by King Saul to stay at the palace."
+                  " David was successful in all he did, so Saul promoted him to a high rank in the army. "
+                  "All the people loved David so much that Saul became quite jealous and wanted David dead. "
+                  "As part of his strategy he decided to offer his older daughter Merab to David in marriage. "
+                  "His only request was that David would continue to serve him in the army."
+                  " He thought that by doing this it would be inevitable that David would be killed at some point.  (See 1 Samuel 18)."),
+          const Tile(
+            question: "What was the bride price that King Saul requested from David for his daughter Michal?",
+            answer: '100 Philistine foreskins',
+            explanation:
+            "After David's refusal to marry Saul's older daughter, King Saul discovered that his daughter Michal was actually in love with David. He saw another opportunity to try to get David to become his son-in-law and thought that Michal could be used as a snare to trap David. David however refused the offer again on the grounds of being a poor man, presumably implying that he wouldn't be able to afford the bride price required by a king. Saul saw this as an opportunity to get David killed so didn't ask for money or anything of monetary value: he simply asked David to go and kill 100 Philistines and bring back their foreskins! (This sounds somewhat gruesome to modern ears!) David agreed to the challenge and went to it with a vengeance. He and his men went out and killed not 100 but 200 Philistines and brought their foreskins to the king. And so David and Michal were married. (See 1 Samuel 18:20-27).",
+            image: '',
+          ),
+        ],
+        300: [
+          const Tile(
+              image: '',
+              question:
+              "Where was David's third anointing?",
+              answer: 'Hebron',
+              explanation:
+              "David was anointed the first time in Bethleham by Samuel before Saul knew about David. The second and third anointings were in Hebron. The second was for part of Israel and the third was for all of Israel."),
+          const Tile(
+            question: " How many sons did Jesse have, and what was David's placing among them, according to 1 Samuel?",
+            answer: '8 sons, youngest',
+            explanation:
+            "1 Samuel 17:12b Jesse had eight sons, and in Saul's time he was old and well advanced in years. Samuel originally thought that the oldest son, Eliab, would be the one who was to be king, but God replied in 1 Samuel 16:7 The Lord does not look at the things man looks at. Man looks at the outward appearance, but the Lord looks at the heart. Meaning to say God did not choose the oldest, but the most faithful.",
+            image: '',
+          ),
+        ],
+        400: [
+          const Tile(
+              image: '',
+              question:
+              " How many years did David reign as king?",
+              answer: '40',
+              explanation:
+              "I Kings 2:11 - David reigned for seven years in Hebron, and then thirty-three years in Jerusalem."),
+          const Tile(
+            question: "While still a young man, David was called into the service of Saul. He became an armor-bearer and did what other task for the king?",
+            answer: 'Played the harp',
+            explanation:
+            "Whenever the spirit from God came upon Saul, David would take his harp and play. Then relief would come to Saul; he would feel better, and the evil spirit would leave him. (1 Samuel 16:23)",
+            image: '',
+          ),
+        ],
+        500: [
+          const Tile(
+              image: '',
+              question:
+              "How did Michal help David to escape from her father when he was trying to kill David?",
+              answer: 'Let him down through the window',
+              explanation:'''
+              Saul's jealousy and hatred of David continued and Saul was constantly on the lookout for an opportunity to kill his son-in-law. One night Saul sent men to watch David's house with the plan to kill him the next morning. Michal must have heard of this, though, and persuaded her husband that he had to flee for his life. She let him down out of a window and he was able to escape.
+
+Michal then dressed an idol and put it in David's place in the bed. When Saul's men came the next day she pretended that David was ill so they couldn't see him. On hearing this her father himself then came to the house and was angry with her deception. (See 1 Samuel 19:11-17).
+              '''),
+        ]
+      },
+    ),
+    // TilesCategory(
+    //     name: "Journey",
+    //     themes: ['kings', "obedience", 'government', 'wars', 'Israel', 'history'],
+    //     image: 'assets/logos/icon.png',
+    //     description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
+    //     tiles: []),
+    // TilesCategory(
+    //     name: "Joseph",
+    //     themes: ['history'],
+    //     image: 'assets/logos/icon.png',
+    //     description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
+    //     tiles: []),
+    // TilesCategory(
+    //     name: "Women In Scripture",
+    //     themes: ['history'],
+    //     image: 'assets/logos/icon.png',
+    //     description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
+    //     tiles: []),
+    // TilesCategory(
+    //     name: "Jesus",
+    //     themes: [],
+    //     image: 'assets/logos/icon.png',
+    //     description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
+    //     tiles: []),
+    // TilesCategory(
+    //     name: "Angels",
+    //     themes: [],
+    //     image: 'assets/logos/icon.png',
+    //     description: 'A challenging look at the kings of Israel and their reign and Gods hand in dealing with them',
+    //     tiles: [])
   ];
-
 
   List<String> get namesSuggestions => suggestedProfiles.map((e) => e.name).toList();
 
-
   List<String> get playerAvatars => suggestedProfiles.map((e) => e.avatar).toList();
 
+  int get categoryLimit => 5;
+
+  int get minimumCategories => 5;
+
+  int get minimumPlayers => 2;
+
+  int get playersLimit => 7;
 
 
-   int get categoryLimit => 5;
-
-   int get minimumCategories => 5;
+  int get tilesNumber => 5;
 
 
-   int get minimumPlayers => 2;
+  int get selectionCountDownTime => 50;
 
-
-   int get playersLimit => 7;
+  int get answeringCountDownTime => 50;
 }
-

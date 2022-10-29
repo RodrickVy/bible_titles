@@ -1,43 +1,50 @@
-import 'package:bibletiles/domain/models/game/tile.question.dart';
+import 'package:bibletiles/domain/models/game/level.dart';
 
 /// A stand alone representation of a question , relating to a subject in scripture.
  class Tile {
-  final int points;
-  final TileQuestion easy;
-  final TileQuestion medium;
-  final TileQuestion hard;
- 
-  const Tile({required this.points, required this.easy, required this.medium, required this.hard});
+   final String image;
 
-  @override
+   final String question;
+   final String answer;
+   final String explanation;
+   final GameLevel level;
+   final int points;
+
+ 
+  const Tile( {this.points = 0,  required this.question, required this.answer, required this.explanation, this.level = GameLevel.easy,required this.image, });
+
+
+   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Tile &&
           runtimeType == other.runtimeType &&
-          points == other.points &&
-          easy == other.easy &&
-          medium == other.medium &&
-          hard == other.hard;
+          image == other.image &&
+          question == other.question &&
+          answer == other.answer &&
+          explanation == other.explanation &&
+          level == other.level;
 
   @override
-  int get hashCode => points.hashCode ^ easy.hashCode ^ medium.hashCode ^ hard.hashCode;
-
-
-
-
+  int get hashCode => points.hashCode ^ image.hashCode ^ question.hashCode ^ answer.hashCode ^ explanation.hashCode ^ level.hashCode;
 
   int get id => hashCode;
-  Tile copyWith({
+
+   Tile copyWith({
+    String? image,
+    String? question,
+    String? answer,
+    String? explanation,
+    GameLevel? level,
     int? points,
-    TileQuestion? easy,
-    TileQuestion? medium,
-    TileQuestion? hard,
   }) {
     return Tile(
+      image: image ?? this.image,
+      question: question ?? this.question,
+      answer: answer ?? this.answer,
+      explanation: explanation ?? this.explanation,
+      level: level ?? this.level,
       points: points ?? this.points,
-      easy: easy ?? this.easy,
-      medium: medium ?? this.medium,
-      hard: hard ?? this.hard,
     );
   }
 }

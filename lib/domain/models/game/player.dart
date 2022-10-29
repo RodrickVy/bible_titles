@@ -47,15 +47,6 @@ class Player {
   }
   
   
-  Player attemptTile(Tile tile){
-    return copyWith(attemptedTiles: [...attemptedTiles,tile.id]);
-  }
 
-  Player addPoints(int add){
-    return copyWith(points: points+add);
-  }
-  Player subtractPoints(int add){
-    return copyWith(points: points-add);
-  }
   int get id => name.hashCode;
 }

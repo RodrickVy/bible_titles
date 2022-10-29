@@ -1,7 +1,6 @@
 import 'package:bibletiles/firebase_options.dart';
 import 'package:bibletiles/home/controller/home.controller.dart';
 import 'package:bibletiles/home/ui/home.page.dart';
-import 'package:bibletiles/play/interface/play.view_model.dart';
 import 'package:bibletiles/play_setup/ui/play.page.dart';
 import 'package:bibletiles/play_setup/controller/play.setup.controller.dart';
 import 'package:bibletiles/play_setup/ui/game.setup.page.dart';
@@ -56,7 +55,7 @@ class BibleTilesApp extends StatelessWidget {
         GetPage(name: '/tour', page: () => const TourPage<TourController>()),
         GetPage(name: '/setup', page: () => const GameSetupPage<PlaySetupController>()),
         GetPage(name: '/setup/:stage', page: () => const GameSetupPage<PlaySetupController>()),
-        GetPage(name: '/play', page: () => const PlayGamePage<PlayViewModel>())
+        GetPage(name: '/play', page: () => const PlayGamePage<PlaySetupController>())
       ],
     );
   }

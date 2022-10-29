@@ -16,7 +16,7 @@ class TextView extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Text(
         text,
-        style:headingStyle(context)?.copyWith(color: style?.color,),
+        style:headingStyle(context)?.copyWith(color: style?.color,fontWeight: style?.fontWeight),
         textAlign: textAlign,
       ),
     );
