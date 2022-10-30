@@ -8,24 +8,26 @@ import 'package:bibletiles/domain/models/game/tiles.category.dart';
 import 'package:get/get.dart';
 
 abstract class PlayGameViewModel {
-   RxInt get countDownClock;
+  RxInt get countDownClock;
 
-   
-   int get selectionCountDownTime;
-   
-   int get answeringCountDownTime;
+  int get selectionCountDownTime;
 
+  int get answeringCountDownTime;
 
   List<String> get playerAvatars;
+
   List<int> get tilesOpened;
+
   List<String> get namesSuggestions;
- Player? get currentPlayer;
+
+  Player? get currentPlayer;
+
   /// limits
   int get categoryLimit;
 
   /// how many tiles in each category for a game
   int get tilesNumber;
-  
+
   int get playersLimit;
 
   int get minimumCategories;
@@ -43,10 +45,11 @@ abstract class PlayGameViewModel {
   SetUpStage get setupStage;
 
   GameLevel get level;
-  
-   Tile? get selectedTile;
 
-   bool get isATileSelected;
+  Tile? get selectedTile;
+
+  bool get isATileSelected;
+
   void setLevel(GameLevel level);
 
   void searchCategories(String query);
@@ -72,14 +75,9 @@ abstract class PlayGameViewModel {
 
   void selectGameType(GameMode type);
 
-  bool isTileOpen(Tile tile);
-
-  void openTile(Player player, Tile tile);
-
-
-
-
-
-   void startCountDown({required int start,  int end = 0,required bool Function() endIf, required Function(int countValue) onCountDownEnd});
-
+  void startCountDown(
+      {required int start,
+      int end = 0,
+      required bool Function() endIf,
+      required Function(int countValue) onCountDownEnd});
 }

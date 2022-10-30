@@ -1,7 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-
-import 'package:bibletiles/domain/models/game/a.play.dart';
 import 'package:bibletiles/domain/models/game/level.dart';
 import 'package:bibletiles/domain/models/game/mode.dart';
 import 'package:bibletiles/domain/models/game/player.dart';
@@ -31,7 +28,9 @@ class PlaySetupController extends GetxController with GameMetaData implements Pl
 
   /// allows us to keep track and update players in a game, this is where players are initially set in setup time
   /// and where their points are updated, its the source of truth for each [Player] state in the game.
-  final RxMap<int, Player> _players = <int, Player>{}.obs;
+  final RxMap<int, Player> _players = <int, Player>{
+
+  }.obs;
 
   /// transformation of _players, for easy looping
   @override
@@ -56,10 +55,12 @@ class PlaySetupController extends GetxController with GameMetaData implements Pl
   /// Then also begins a selection-countdown for the player.
   void __nextPlayer() {
     if (!allTilesAttempted) {
-      if (_currentPlayer.value < _players.length - 1) {
-        _currentPlayer.update((val) => _players.values.toList()[val! + 1].id);
+      int currentPlayerIndex = _players.values.toList().indexOf(currentPlayer);
+
+      if (currentPlayerIndex < _players.length - 1) {
+        _currentPlayer(_players.values.toList()[currentPlayerIndex+ 1].id);
       } else {
-        _currentPlayer.update((val) => _players.values.first.id);
+        _currentPlayer(_players.values.first.id);
       }
 
       /// After updating the player , we begin a selection countdown
@@ -294,25 +295,6 @@ class PlaySetupController extends GetxController with GameMetaData implements Pl
   void selectGameType(GameMode type) {
     _gameType(type);
   }
-
-  @override
-  bool isTileOpen(Tile tile) {
-    return _tilesOpened.contains(tile.id);
-  }
-
-  /// RXs
-  @override
-  void openTile(Player player, Tile tile) {
-    // _currentPlay(APlay(
-    //   level: level,
-    //   player: player,
-    //   tile: tile,
-    //   onPlayerUpdate: (player) {
-    //     _players[player.id] = player;
-    //   },
-    // ));
-  }
-
 
 
 }

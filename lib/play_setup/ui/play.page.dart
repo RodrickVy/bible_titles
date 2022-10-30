@@ -17,7 +17,10 @@ class PlayGamePage<T extends PlayGameViewModel> extends AView<T> {
     return Scaffold(
       appBar: const BibleTilesAppBar<HomeController>(),
       body: ListView(
-        children: [TilesGrid<T>()],
+        children: [
+          TilesGrid<T>(),
+          PlayerView<T>(controller.players.first.id)
+        ],
       ),
     );
   }
@@ -39,8 +42,7 @@ class TilesGrid<T extends PlayGameViewModel> extends AView<T> {
         crossAxisAlignment: WrapCrossAlignment.start,
         children: [
           ...controller.selectedCategories.map((TilesCategory category) => Container(
-
-              width:  adapt(phone: Get.width, tablet: 180, desktop: 300),
+              width: adapt(phone: Get.width, tablet: 180, desktop: 300),
               padding: const EdgeInsets.only(top: 20, left: 2, bottom: 10, right: 2),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -53,7 +55,7 @@ class TilesGrid<T extends PlayGameViewModel> extends AView<T> {
                         ),
                         borderRadius: const BorderRadius.all(Radius.circular(12)),
                       ),
-                      height:60,
+                      height: 60,
                       child: FittedBox(
                         child: TextView(
                           text: category.name.toUpperCase(),
@@ -66,7 +68,7 @@ class TilesGrid<T extends PlayGameViewModel> extends AView<T> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        width:10,
+                        width: 10,
                         height: 5,
                         clipBehavior: Clip.hardEdge,
                         decoration: const BoxDecoration(color: Colors.transparent),
@@ -95,28 +97,31 @@ class TileView<T extends PlayGameViewModel> extends AView<T> {
   Widget builder(BuildContext context, T controller) {
     return Obx(() {
       return Opacity(
-        opacity: controller.isTileOpen(tile) ? 0 : 1,
-        child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: Material(
-            elevation: 5,
-            shape: const RoundedRectangleBorder(
-                side: BorderSide(color: Colors.black12, width: 5), borderRadius: BorderRadius.all(Radius.circular(12))),
-            color: Get.theme.colorScheme.primary,
-            child: Container(
-              width: 100,
-              height: 70,
-
-              margin: const EdgeInsets.all(12),
-              // decoration: const BoxDecoration(
-              //   border:  Border.fromBorderSide(BorderSide(color: Colors.white,width: 2)),
-              //   borderRadius: BorderRadius.all(Radius.circular(12))
-              // ),
-              alignment: Alignment.center,
-              child: TextView(
-                text: tile.points.toString(),
-                type: HeadingType.displaySmall,
-                style:  TextStyle(fontWeight: FontWeight.w900,color: Get.theme.colorScheme.secondary.withAlpha(178)),
+        opacity: controller.tilesOpened.contains(tile.id) ? 0.4 : 1,
+        child: GestureDetector(
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Material(
+              elevation: 5,
+              shape: const RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.black12, width: 5),
+                  borderRadius: BorderRadius.all(Radius.circular(12))),
+              color: Get.theme.colorScheme.primary,
+              child: Container(
+                width: 100,
+                height: 70,
+                margin: const EdgeInsets.all(12),
+                // decoration: const BoxDecoration(
+                //   border:  Border.fromBorderSide(BorderSide(color: Colors.white,width: 2)),
+                //   borderRadius: BorderRadius.all(Radius.circular(12))
+                // ),
+                alignment: Alignment.center,
+                child: TextView(
+                  text: tile.points.toString(),
+                  type: HeadingType.displaySmall,
+                  style: TextStyle(fontWeight: FontWeight.w900, color: Get.theme.colorScheme.secondary.withAlpha(178)),
+                ),
               ),
             ),
           ),
@@ -127,8 +132,7 @@ class TileView<T extends PlayGameViewModel> extends AView<T> {
 }
 
 class TileOpened<T extends PlayGameViewModel> extends AView<T> {
-
-
+  const TileOpened({super.key});
 
   @override
   Widget builder(BuildContext context, T controller) {
@@ -137,16 +141,13 @@ class TileOpened<T extends PlayGameViewModel> extends AView<T> {
         if (controller.currentPlayer != null) {
           return SizedBox(
             width: Get.width - 30,
-            height:  Get.height - 50,
+            height: Get.height - 50,
             child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextView(text: controller.currentPlayer!.name),
                 ),
-
-
-
               ],
             ),
           );
@@ -154,6 +155,39 @@ class TileOpened<T extends PlayGameViewModel> extends AView<T> {
           return SizedBox();
         }
       },
+    );
+  }
+}
+
+class PlayerView<T extends PlayGameViewModel> extends AView<T> {
+  final int playerId;
+
+  const PlayerView(this.playerId, {super.key});
+
+  @override
+  Widget builder(BuildContext context, T controller) {
+    return Material(
+      elevation: 5,
+      shape: const RoundedRectangleBorder(
+          side: BorderSide(color: Colors.black12, width: 5), borderRadius: BorderRadius.all(Radius.circular(12))),
+      color: Get.theme.colorScheme.primary,
+      child: Column(
+        children: [
+          TextView(
+            text: controller.players.firstWhere((element) => element.id == playerId).name,
+            type: HeadingType.displaySmall,
+            style: TextStyle(fontWeight: FontWeight.w900, color: Get.theme.colorScheme.secondary.withAlpha(178)),
+          ),
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.add)
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }

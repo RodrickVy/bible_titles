@@ -1,8 +1,8 @@
 import 'package:bibletiles/firebase_options.dart';
 import 'package:bibletiles/home/controller/home.controller.dart';
 import 'package:bibletiles/home/ui/home.page.dart';
+import 'package:bibletiles/play_setup/controller/play.controller.dart';
 import 'package:bibletiles/play_setup/ui/play.page.dart';
-import 'package:bibletiles/play_setup/controller/play.setup.controller.dart';
 import 'package:bibletiles/play_setup/ui/game.setup.page.dart';
 import 'package:bibletiles/tour/controller/tour.controller.dart';
 import 'package:bibletiles/tour/ui/tour.page.dart';
