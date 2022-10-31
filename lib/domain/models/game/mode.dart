@@ -1,5 +1,5 @@
 
 enum GameMode{
-  teams,
-  single
+  timed,
+  notTimed
 }

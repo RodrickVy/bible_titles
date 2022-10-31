@@ -4,7 +4,7 @@ import 'package:bibletiles/domain/ui/a.view.dart';
 import 'package:bibletiles/domain/ui/check.toggle.dart';
 import 'package:bibletiles/domain/ui/heading.dart';
 
-import 'package:bibletiles/play_setup/interface/play.game.view_model.dart';
+import 'package:bibletiles/play/interface/play.game.view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

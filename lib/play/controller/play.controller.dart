@@ -5,9 +5,9 @@ import 'package:bibletiles/domain/models/game/player.dart';
 import 'package:bibletiles/domain/models/game/setup.stage.dart';
 import 'package:bibletiles/domain/models/game/tile.dart';
 import 'package:bibletiles/domain/models/game/tiles.category.dart';
-import 'package:bibletiles/play_setup/controller/repo.dart';
+import 'package:bibletiles/play/controller/repo.dart';
 
-import 'package:bibletiles/play_setup/interface/play.game.view_model.dart';
+import 'package:bibletiles/play/interface/play.game.view_model.dart';
 import 'package:get/get.dart';
 
 class PlaySetupController extends GetxController with GameMetaData implements PlayGameViewModel {
@@ -28,24 +28,24 @@ class PlaySetupController extends GetxController with GameMetaData implements Pl
 
   /// allows us to keep track and update players in a game, this is where players are initially set in setup time
   /// and where their points are updated, its the source of truth for each [Player] state in the game.
-  final RxMap<int, Player> _players = <int, Player>{
-
+  final RxMap<int, Player> players = <int, Player>{
+    // 100: Player(name: "The Jims", image: 'image', points: 0, attemptedTiles: []),
+    // 200: Player(name: "Catalyst", image: 'image', points: 0, attemptedTiles: []),
+    // 300: Player(name: "Owners", image: 'image', points: 0, attemptedTiles: []),
   }.obs;
 
-  /// transformation of _players, for easy looping
-  @override
-  List<Player> get players => _players.values.toList();
+  /// transformation of players, for easy looping
 
   /// the player who's turn it is to play.
   final RxInt _currentPlayer = RxInt(0);
 
   @override
-  Player get currentPlayer => _players[_currentPlayer.value]!;
+  Player get currentPlayer => players.values.toList()[_currentPlayer.value];
 
   
   /// called when the user has selected a tile for the player
   __playerSelectedATile(int points){
-    _players[_currentPlayer.value] = currentPlayer.copyWith(
+    players[_currentPlayer.value] = currentPlayer.copyWith(
         points: points,
         attemptedTiles: [...currentPlayer.attemptedTiles,selectedTile!.id]
     );
@@ -55,12 +55,12 @@ class PlaySetupController extends GetxController with GameMetaData implements Pl
   /// Then also begins a selection-countdown for the player.
   void __nextPlayer() {
     if (!allTilesAttempted) {
-      int currentPlayerIndex = _players.values.toList().indexOf(currentPlayer);
+      int currentPlayerIndex = players.values.toList().indexOf(currentPlayer);
 
-      if (currentPlayerIndex < _players.length - 1) {
-        _currentPlayer(_players.values.toList()[currentPlayerIndex+ 1].id);
+      if (currentPlayerIndex < players.length - 1) {
+        _currentPlayer(players.values.toList()[currentPlayerIndex+ 1].id);
       } else {
-        _currentPlayer(_players.values.first.id);
+        _currentPlayer(players.values.first.id);
       }
 
       /// After updating the player , we begin a selection countdown
@@ -102,7 +102,7 @@ class PlaySetupController extends GetxController with GameMetaData implements Pl
 
   /// skips to the specified player , option can be used if player is not around.
   void skipPlayerTo(int player) {
-    if (player < _players.length) {
+    if (player < players.length) {
       _currentPlayer(player);
     }
   }
@@ -148,7 +148,7 @@ class PlaySetupController extends GetxController with GameMetaData implements Pl
     });
   }
 
-  final Rx<GameMode> _gameType = GameMode.teams.obs;
+  final Rx<GameMode> _gameType = GameMode.timed.obs;
 
   @override
   GameMode get gameType => _gameType.value;
@@ -283,12 +283,12 @@ class PlaySetupController extends GetxController with GameMetaData implements Pl
 
   @override
   void addPlayer(Player player) {
-    _players[player.id] = player;
+    players[player.id] = player;
   }
 
   @override
   void removePlayer(Player player) {
-    _players.remove(player);
+    players.remove(player);
   }
 
   @override

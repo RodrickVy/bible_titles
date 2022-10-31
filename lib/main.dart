@@ -1,9 +1,9 @@
 import 'package:bibletiles/firebase_options.dart';
 import 'package:bibletiles/home/controller/home.controller.dart';
 import 'package:bibletiles/home/ui/home.page.dart';
-import 'package:bibletiles/play_setup/controller/play.controller.dart';
-import 'package:bibletiles/play_setup/ui/play.page.dart';
-import 'package:bibletiles/play_setup/ui/game.setup.page.dart';
+import 'package:bibletiles/play/controller/play.controller.dart';
+import 'package:bibletiles/play/ui/play/play.page.dart';
+import 'package:bibletiles/play/ui/setup/game.setup.page.dart';
 import 'package:bibletiles/tour/controller/tour.controller.dart';
 import 'package:bibletiles/tour/ui/tour.page.dart';
 import 'package:firebase_core/firebase_core.dart';

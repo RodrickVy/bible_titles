@@ -3,8 +3,7 @@ import 'package:bibletiles/domain/models/game/player.dart';
 import 'package:bibletiles/domain/models/structures/list.dart';
 import 'package:bibletiles/domain/ui/a.view.dart';
 import 'package:bibletiles/domain/ui/heading.dart';
-
-import 'package:bibletiles/play_setup/interface/play.game.view_model.dart';
+import 'package:bibletiles/play/interface/play.game.view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -69,7 +68,7 @@ class SetupPlayers<T extends PlayGameViewModel> extends AView<T> {
                     )),
               ),
             ),
-            ...controller.players.map2((player, index) {
+            ...controller.players.values.toList().map((player) {
               return Container(
                 width: adapt(phone: 200, tablet: 300, desktop: 420),
                 padding: const EdgeInsets.all(16.0),

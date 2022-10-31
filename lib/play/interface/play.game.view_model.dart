@@ -38,7 +38,7 @@ abstract class PlayGameViewModel {
 
   List<TilesCategory> get selectedCategories;
 
-  List<Player> get players;
+  RxMap<int, Player> get players;
 
   GameMode get gameType;
 

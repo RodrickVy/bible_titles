@@ -2,11 +2,11 @@ import 'package:bibletiles/domain/models/game/setup.stage.dart';
 import 'package:bibletiles/domain/ui/a.view.dart';
 import 'package:bibletiles/home/controller/home.controller.dart';
 import 'package:bibletiles/home/ui/appbar.view.dart';
-import 'package:bibletiles/play_setup/interface/play.game.view_model.dart';
-import 'package:bibletiles/play_setup/ui/setup.categories.dart';
-import 'package:bibletiles/play_setup/ui/setup.level.dart';
-import 'package:bibletiles/play_setup/ui/setup.mode.dart';
-import 'package:bibletiles/play_setup/ui/setup.players.dart';
+import 'package:bibletiles/play/interface/play.game.view_model.dart';
+import 'package:bibletiles/play/ui/setup/setup.categories.dart';
+import 'package:bibletiles/play/ui/setup/setup.level.dart';
+import 'package:bibletiles/play/ui/setup/setup.mode.dart';
+import 'package:bibletiles/play/ui/setup/setup.players.dart';
 import 'package:flutter/material.dart';
 
 class GameSetupPage<T extends PlayGameViewModel> extends AView<T> {
@@ -31,10 +31,3 @@ class GameSetupPage<T extends PlayGameViewModel> extends AView<T> {
     );
   }
 }
-
-
-
-
-
-
-
